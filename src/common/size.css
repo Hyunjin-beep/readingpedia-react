@@ -1,0 +1,11 @@
+/*Size*/
+@value --padding: 12px;
+@value --avatar-size: 36px;
+
+/*Font size*/
+@value --font-larger: 35px;
+@value --font-large: 20px;
+@value --font-regular: 16px;
+@value --font-medium: 14px;
+@value --font-small: 12px;
+@value --font-micro: 10px;

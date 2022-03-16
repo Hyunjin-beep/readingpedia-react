@@ -1,0 +1,84 @@
+@value --color-light-blue,--color-dark-blue, --color-beige, --color-normal-blue, --grey-dark-color from '../../common/colors.css';
+@value --font-larger from '../../common/size.css';
+
+a {
+  text-decoration: none;
+  color: --color-beige;
+  font-size: --font-larger;
+}
+
+button {
+  border: none;
+  outline: none;
+  background-color: --color-normal-blue;
+}
+
+.navBar {
+  display: flex;
+  justify-content: space-between;
+
+  padding: 2rem 3rem;
+
+  background-color: --color-dark-blue;
+}
+
+.navLeft {
+  display: flex;
+  width: 85%;
+  justify-content: space-between;
+
+  font-size: --font-larger;
+}
+
+.homeLink {
+  font-weight: bolder;
+  transition: ease-in-out 300ms;
+}
+
+.homeLink:hover {
+  transform: scale(1.1);
+}
+
+.search,
+.submitBtn {
+  padding: 5px 25px;
+  vertical-align: middle;
+  margin-right: 15px;
+}
+
+.submitBtn {
+  font-size: 15px;
+}
+
+.search {
+  padding: 7px 20px;
+  font-size: 15px;
+  border: none;
+  border-radius: 5px;
+}
+
+.icon {
+  color: --color-beige;
+}
+
+.navRight {
+  width: 15%;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.navRightBtn {
+  margin-left: 10px;
+  padding: 3px 25px;
+  border-radius: 5px;
+}
+
+.personal,
+.account {
+  font-size: 35px;
+}
+
+button:hover {
+  background-color: #4a64b1;
+  pointer: cursor;
+}

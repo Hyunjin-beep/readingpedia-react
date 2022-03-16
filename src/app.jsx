@@ -1,8 +1,25 @@
-import React from 'react'
+import axios from 'axios'
+import React, { useState, useEffect } from 'react'
 import './app.css'
+import Books from './components/books/books'
+import Header from './components/header/header'
 
-function App() {
-  return <h1>Hello</h1>
+function App({ booksAPI }) {
+  const [bestsellersISBN, setBestsellers] = useState([])
+  const detail = []
+
+  useEffect(() => {
+    booksAPI.nyBooks().then(isbns => {
+      setBestsellers(isbns)
+    })
+  })
+
+  return (
+    <>
+      <Header></Header>
+      {/* <Books isbns={bestsellersISBN}></Books> */}
+    </>
+  )
 }
 
 export default App
