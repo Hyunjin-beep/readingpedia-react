@@ -2,13 +2,13 @@ import React, { useState, useEffect } from 'react'
 import Book from '../book/book'
 import styles from './books.module.css'
 
-const Books = ({ isbns }) => {
+const Books = ({ detail }) => {
   return (
     <section className={styles.container}>
-      <h3 className={styles.title}></h3>
+      <h3 className={styles.title}>BestSellers</h3>
       <ul className={styles.books}>
-        {isbns.map(isbn => (
-          <Book key={isbn} isbn={isbn}></Book>
+        {detail[0].map(detail => (
+          <Book key={detail[0].id} book={detail[0]}></Book>
         ))}
       </ul>
     </section>

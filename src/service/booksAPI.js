@@ -9,7 +9,7 @@ class BooksAPI {
       'https://api.nytimes.com/svc/books/v3/lists.json?list-name=hardcover-fiction&api-key=a5bvxgKcuKEGoqTrnDOYoon74EqWIJAz'
   }
 
-  async nyBooks() {
+  async getBestsellers() {
     const response = await fetch(`${this.nylink}`, this.getRequestOptions)
 
     const json = await response.json()
@@ -25,6 +25,7 @@ class BooksAPI {
       this.getRequestOptions
     )
     const json = await response.json()
+
     return json.items
   }
 }

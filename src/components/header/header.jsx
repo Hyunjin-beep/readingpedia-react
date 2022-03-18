@@ -1,8 +1,8 @@
-import React, { useRef } from 'react'
+import React, { useRef, memo } from 'react'
 
 import styles from './header.module.css'
 
-const Header = props => {
+const Header = memo(() => {
   const searchInput = useRef()
 
   return (
@@ -40,6 +40,6 @@ const Header = props => {
       </div>
     </nav>
   )
-}
+})
 
 export default Header

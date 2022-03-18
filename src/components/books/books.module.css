@@ -1,0 +1,19 @@
+@value --color-classy-grey from '../../common/colors.css';
+@value --font-larger from '../../common/size.css';
+
+.container {
+  margin: 5rem 0;
+  padding: 1rem 2rem;
+  background-color: --color-classy-grey;
+}
+
+.title {
+  display: inline-block;
+  font-size: calc(--font-larger * 0.7);
+}
+
+.books {
+  white-space: nowrap;
+  overflow-y: hidden;
+  overflow-x: scroll;
+}
