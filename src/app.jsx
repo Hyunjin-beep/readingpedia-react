@@ -1,16 +1,20 @@
 import React, { useState, useEffect } from 'react'
 
+import { BrowserRouter, Routes, Route, useNavigate } from 'react-router-dom'
+
 import styles from './app.module.css'
 import Book from './components/book/book'
 import Books from './components/books/books'
+import Form from './components/form/form'
 import Header from './components/header/header'
 
-function App({ booksAPI }) {
+function App({ booksAPI, authService, realtimeDatabase }) {
   const [bestsellersISBN, setBestsellers] = useState([])
   const [detail, setDetail] = useState([])
   const [genres, setGenre] = useState([])
   const detailArray = []
   let id = 0
+  const navigate = useNavigate()
 
   useEffect(() => {
     booksAPI ///
@@ -52,27 +56,47 @@ function App({ booksAPI }) {
         })
         .catch(error => console.log('error:', error))
     }
-  }, [])
+  }, [booksAPI])
+
+  const goToSetting = () => {
+    navigate('/setting')
+  }
 
   return (
     <>
-      <Header></Header>
-      <div>
-        {detail !== undefined ? (
-          <Books detail1={detail} title={'BestSeller'}></Books>
-        ) : null}
-      </div>
-      {genres.map(items => (
-        <div key={id++}>
-          {items.map(item => (
-            <Books
-              key={item[0][0].id}
-              detail2={item[0]}
-              title={item[1]}
-            ></Books>
-          ))}
-        </div>
-      ))}
+      <Header goToSetting={goToSetting}></Header>
+      <Routes>
+        <Route
+          path="/setting"
+          exact
+          element={
+            <Form
+              authService={authService}
+              realtimeDatabase={realtimeDatabase}
+            ></Form>
+          }
+        ></Route>
+
+        <Route
+          path="/"
+          exact
+          element={
+            <div>
+              {genres.map(items => (
+                <div key={id++}>
+                  {items.map(item => (
+                    <Books
+                      key={item[0][0].id}
+                      detail2={item[0]}
+                      title={item[1]}
+                    ></Books>
+                  ))}
+                </div>
+              ))}
+            </div>
+          }
+        ></Route>
+      </Routes>
     </>
   )
 }

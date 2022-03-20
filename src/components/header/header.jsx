@@ -1,8 +1,9 @@
 import React, { useRef, memo } from 'react'
+import { useNavigate } from 'react-router-dom'
 
 import styles from './header.module.css'
 
-const Header = memo(() => {
+const Header = ({ goToSetting }) => {
   const searchInput = useRef()
 
   return (
@@ -32,7 +33,7 @@ const Header = memo(() => {
           </a>
         </button>
 
-        <button className={styles.navRightBtn}>
+        <button className={styles.navRightBtn} onClick={goToSetting}>
           <a href="#" className={styles.account}>
             <i className="fas fa-cog"></i>
           </a>
@@ -40,6 +41,6 @@ const Header = memo(() => {
       </div>
     </nav>
   )
-})
+}
 
 export default Header

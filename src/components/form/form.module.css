@@ -1,0 +1,52 @@
+@value --grey-light-color, --color-light-blue,--color-classy-grey from '../../common/colors.css';
+@value --font-large from '../../common/size.css';
+.form_container {
+  display: flex;
+  justify-content: center;
+  text-align: center;
+
+  margin-top: 5rem;
+  padding: 2rem 0;
+}
+
+.information {
+  display: block;
+}
+
+.box {
+  display: flex;
+  align-items: baseline;
+}
+
+.forLabel {
+  width: 40%;
+  margin-top: 6px;
+  margin-right: 4rem;
+  font-size: --font-large;
+}
+
+.input {
+  width: 300px;
+  border: 1px solid --grey-light-color;
+  border-radius: 4px;
+  padding: 8px;
+
+  margin-top: 6px;
+  font-size: --font-large;
+}
+
+.button {
+  padding: 5px 15px;
+  border: none;
+  border-radius: 5px;
+  background-color: --color-classy-grey;
+  color: --color-light-blue;
+  font-size: --font-large;
+
+  margin-top: 2rem;
+}
+
+.button:hover {
+  cursor: pointer;
+  background-color: #6a768b;
+}

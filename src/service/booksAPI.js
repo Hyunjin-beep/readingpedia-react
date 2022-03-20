@@ -1,7 +1,11 @@
 class BooksAPI {
   constructor() {
     this.getRequestOptions = {
+      mode: 'cors',
       method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+      },
     }
 
     this.googleBooks = `https://www.googleapis.com/books/v1/volumes`
