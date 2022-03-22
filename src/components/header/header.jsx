@@ -1,15 +1,14 @@
-import React, { useRef, memo } from 'react'
-import { useNavigate } from 'react-router-dom'
+import React, { useRef } from 'react'
 
 import styles from './header.module.css'
 
-const Header = ({ goToSetting }) => {
+const Header = ({ goToSetting, authService }) => {
   const searchInput = useRef()
 
   return (
     <nav className={styles.navBar}>
       <div className={styles.navLeft}>
-        <a href="#" className={styles.homeLink}>
+        <a className={styles.homeLink} onClick={() => goToSetting('')}>
           ReaidngPedia
         </a>
 
@@ -33,7 +32,10 @@ const Header = ({ goToSetting }) => {
           </a>
         </button>
 
-        <button className={styles.navRightBtn} onClick={goToSetting}>
+        <button
+          className={styles.navRightBtn}
+          onClick={() => goToSetting('login')}
+        >
           <a href="#" className={styles.account}>
             <i className="fas fa-cog"></i>
           </a>

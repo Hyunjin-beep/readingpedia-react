@@ -1,20 +1,27 @@
 import React, { useState, useEffect } from 'react'
 
-import { BrowserRouter, Routes, Route, useNavigate } from 'react-router-dom'
+import {
+  BrowserRouter,
+  Routes,
+  Route,
+  useNavigate,
+  useLocation,
+} from 'react-router-dom'
 
-import styles from './app.module.css'
-import Book from './components/book/book'
 import Books from './components/books/books'
 import Form from './components/form/form'
 import Header from './components/header/header'
+import Login from './components/login/login'
 
 function App({ booksAPI, authService, realtimeDatabase }) {
+  const navigateState = useLocation().state
+  const navigate = useNavigate()
   const [bestsellersISBN, setBestsellers] = useState([])
   const [detail, setDetail] = useState([])
   const [genres, setGenre] = useState([])
+  const [userID, setUserID] = useState(navigateState && navigateState.id)
   const detailArray = []
   let id = 0
-  const navigate = useNavigate()
 
   useEffect(() => {
     booksAPI ///
@@ -58,22 +65,36 @@ function App({ booksAPI, authService, realtimeDatabase }) {
     }
   }, [booksAPI])
 
-  const goToSetting = () => {
-    navigate('/setting')
+  const goToSetting = (path, userID) => {
+    navigate(`/${path}`, { state: { id: userID } })
+    userID && setUserID(userID)
   }
 
   return (
     <>
-      <Header goToSetting={goToSetting}></Header>
+      <Header goToSetting={goToSetting} authService={authService}></Header>
       <Routes>
         <Route
-          path="/setting"
+          path="/signUp"
           exact
           element={
             <Form
+              goToSetting={goToSetting}
               authService={authService}
               realtimeDatabase={realtimeDatabase}
             ></Form>
+          }
+        ></Route>
+
+        <Route
+          path="/login"
+          exact
+          element={
+            <Login
+              goToSetting={goToSetting}
+              authService={authService}
+              realtimeDatabase={realtimeDatabase}
+            ></Login>
           }
         ></Route>
 

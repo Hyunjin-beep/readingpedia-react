@@ -1,7 +1,11 @@
 import React, { useRef } from 'react'
 import styles from './form.module.css'
 
-const Form = ({ authService, realtimeDatabase }) => {
+const Form = ({
+  authService,
+  realtimeDatabase,
+  goToSetting = { goToSetting },
+}) => {
   const fullName = useRef()
   const email = useRef()
   const nickName = useRef()
@@ -16,7 +20,7 @@ const Form = ({ authService, realtimeDatabase }) => {
 
     if (passwordCheck) {
       authService ///
-        .logIn(email.current.value, password.current.value)
+        .signIn(email.current.value, password.current.value)
         .then(userID => {
           const user = {
             id: userID,
@@ -27,6 +31,10 @@ const Form = ({ authService, realtimeDatabase }) => {
 
           realtimeDatabase.saveData(`users/${userID}`, user)
         })
+
+      setTimeout(() => {
+        goToSetting('login')
+      }, 3000)
     } else {
       alert('Password is not correct')
     }
