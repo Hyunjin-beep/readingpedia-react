@@ -16,7 +16,7 @@ const Login = ({ authService, realtimeDatabase, goToSetting }) => {
       .then(userID => {
         setTimeout(() => {
           goToSetting('', userID)
-        }, 3000)
+        }, 2000)
       })
   }
 

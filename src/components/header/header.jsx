@@ -2,7 +2,7 @@ import React, { useRef } from 'react'
 
 import styles from './header.module.css'
 
-const Header = ({ goToSetting, authService }) => {
+const Header = ({ goToSetting, userID }) => {
   const searchInput = useRef()
 
   return (
@@ -34,7 +34,9 @@ const Header = ({ goToSetting, authService }) => {
 
         <button
           className={styles.navRightBtn}
-          onClick={() => goToSetting('login')}
+          onClick={() => {
+            userID ? goToSetting('account') : goToSetting('login')
+          }}
         >
           <a href="#" className={styles.account}>
             <i className="fas fa-cog"></i>

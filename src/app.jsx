@@ -7,6 +7,7 @@ import {
   useNavigate,
   useLocation,
 } from 'react-router-dom'
+import Account from './components/account/account'
 
 import Books from './components/books/books'
 import Form from './components/form/form'
@@ -72,7 +73,11 @@ function App({ booksAPI, authService, realtimeDatabase }) {
 
   return (
     <>
-      <Header goToSetting={goToSetting} authService={authService}></Header>
+      <Header
+        goToSetting={goToSetting}
+        authService={authService}
+        userID={userID}
+      ></Header>
       <Routes>
         <Route
           path="/signUp"
@@ -95,6 +100,19 @@ function App({ booksAPI, authService, realtimeDatabase }) {
               authService={authService}
               realtimeDatabase={realtimeDatabase}
             ></Login>
+          }
+        ></Route>
+
+        <Route
+          path="/account"
+          exact
+          element={
+            <Account
+              userID={userID}
+              goToSetting={goToSetting}
+              authService={authService}
+              realtimeDatabase={realtimeDatabase}
+            ></Account>
           }
         ></Route>
 

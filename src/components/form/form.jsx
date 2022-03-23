@@ -34,7 +34,7 @@ const Form = ({
 
       setTimeout(() => {
         goToSetting('login')
-      }, 3000)
+      }, 2000)
     } else {
       alert('Password is not correct')
     }
