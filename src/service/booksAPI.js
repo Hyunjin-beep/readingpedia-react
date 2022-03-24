@@ -45,6 +45,15 @@ class BooksAPI {
 
     return json.items
   }
+
+  async googleBooksID(id) {
+    const response = await fetch(
+      `${this.googleBooks}/${id}`,
+      this.getRequestOptions
+    )
+    const json = await response.json()
+    return json
+  }
 }
 
 export default BooksAPI

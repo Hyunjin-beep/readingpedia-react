@@ -1,0 +1,54 @@
+@value --grey-dark-color from '../../common/colors.css';
+@value --font-larger from '../../common/size.css';
+.container {
+  display: flex;
+  width: 65%;
+  margin: auto;
+  margin-top: 3rem;
+  padding: 4rem 2rem;
+
+  border: 2px solid --grey-dark-color;
+  border-radius: 5px;
+}
+
+.information {
+  padding: 14px;
+  text-align: center;
+}
+
+.description {
+  width: 70%;
+
+  float: right;
+}
+
+.cover {
+  display: inline-block;
+  width: 30%;
+  height: 100%;
+}
+
+.coverImg {
+  width: 70%;
+  margin-top: 1rem;
+  border: 1px solid black;
+}
+
+.top {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+}
+
+.title,
+.author {
+  margin-bottom: 2rem;
+}
+
+.title {
+  font-size: calc(--font-larger * 0.7);
+}
+
+.overview {
+  line-height: 30px;
+}

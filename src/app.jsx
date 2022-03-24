@@ -1,15 +1,11 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useCallback } from 'react'
 
-import {
-  BrowserRouter,
-  Routes,
-  Route,
-  useNavigate,
-  useLocation,
-} from 'react-router-dom'
+import { Routes, Route, useNavigate, useLocation } from 'react-router-dom'
+
 import Account from './components/account/account'
 
 import Books from './components/books/books'
+import Detail from './components/detail/detail'
 import Form from './components/form/form'
 import Header from './components/header/header'
 import Login from './components/login/login'
@@ -21,63 +17,72 @@ function App({ booksAPI, authService, realtimeDatabase }) {
   const [detail, setDetail] = useState([])
   const [genres, setGenre] = useState([])
   const [userID, setUserID] = useState(navigateState && navigateState.id)
+  const [bookID, setBookID] = useState(navigateState && navigateState.bookId)
+
   const detailArray = []
   let id = 0
 
-  useEffect(() => {
-    booksAPI ///
-      .getBestsellers() ///
-      .then(result => {
-        setBestsellers(result)
-        return result
-      })
-      .then(isbns => {
-        isbns.map(isbn => {
-          booksAPI
-            .googleBooksISBN(isbn) ///
-            .then(result => {
-              detailArray.push(result)
-              return detailArray
-            }) ///
-            .then(resultDetail => {
-              setDetail([resultDetail])
-            }) ///
-
-            .catch(error => console.log('error:', error))
-        })
-      })
-  }, [booksAPI])
+  const controller = new AbortController()
 
   useEffect(() => {
-    const categories = randomCategory()
-    const genreDetail = []
-
-    for (let category of categories) {
+    setTimeout(() => {
       booksAPI ///
-        .googleBooksGenre(category) ///
-        .then(item => {
-          genreDetail.push([item, category])
-          return genreDetail
-        }) ///
-        .then(categoryDetail => {
-          setGenre([categoryDetail])
+        .getBestsellers() ///
+        .then(result => {
+          setBestsellers(result)
+          return result
         })
-        .catch(error => console.log('error:', error))
-    }
+        .then(isbns => {
+          isbns.map(isbn => {
+            booksAPI
+              .googleBooksISBN(isbn) ///
+              .then(result => {
+                detailArray.push(result)
+                return detailArray
+              }) ///
+              .then(resultDetail => {
+                setDetail([resultDetail])
+              }) ///
+
+              .catch(error => console.log('error:', error))
+          })
+        })
+    }, 2000)
+
+    return () => controller.abort()
   }, [booksAPI])
 
-  const goToSetting = (path, userID) => {
-    navigate(`/${path}`, { state: { id: userID } })
+  useEffect(() => {
+    setTimeout(() => {
+      const categories = randomCategory()
+      const genreDetail = []
+
+      for (let category of categories) {
+        booksAPI ///
+          .googleBooksGenre(category) ///
+          .then(item => {
+            genreDetail.push([item, category])
+            return genreDetail
+          }) ///
+          .then(categoryDetail => {
+            setGenre([categoryDetail])
+          })
+          .catch(error => console.log('error:', error))
+      }
+    }, 2000)
+
+    return () => controller.abort()
+  }, [booksAPI])
+
+  const goToSetting = useCallback((path, userID = '', bookID = '') => {
+    navigate(`/${path}`, { state: { id: userID, bookId: bookID } })
     userID && setUserID(userID)
-  }
+    bookID && setBookID(bookID)
+  })
 
   return (
-    <>
-      <Header
-        goToSetting={goToSetting}
-        authService={authService}
-        userID={userID}
-      ></Header>
+    <div>
+      <Header goToSetting={goToSetting} userID={userID}></Header>
       <Routes>
         <Route
           path="/signUp"
@@ -128,6 +133,7 @@ function App({ booksAPI, authService, realtimeDatabase }) {
                       key={item[0][0].id}
                       detail2={item[0]}
                       title={item[1]}
+                      goToSetting={goToSetting}
                     ></Books>
                   ))}
                 </div>
@@ -135,8 +141,14 @@ function App({ booksAPI, authService, realtimeDatabase }) {
             </div>
           }
         ></Route>
+
+        <Route
+          path="/detail"
+          exact
+          element={<Detail bookID={bookID} booksAPI={booksAPI}></Detail>}
+        ></Route>
       </Routes>
-    </>
+    </div>
   )
 }
 

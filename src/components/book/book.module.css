@@ -3,6 +3,7 @@
 
 .container {
   display: inline-block;
+
   width: 130px;
   height: 250px;
   margin-right: 2rem;
@@ -21,11 +22,12 @@
   width: 107px;
   height: 160px;
   margin: 20px;
+  border: 1px solid black;
 }
 
 .img {
-  width: 100%;
-  hegiht: 100%;
+  width: 107px;
+  height: 160px;
 }
 
 .title {

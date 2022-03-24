@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from 'react'
+import React from 'react'
 import Book from '../book/book'
 import styles from './books.module.css'
 
-const Books = ({ detail1, detail2, title }) => {
+const Books = ({ detail1, detail2, title, goToSetting }) => {
   const details = detail1 ? detail1[0] : detail2
 
   return (
@@ -13,6 +13,7 @@ const Books = ({ detail1, detail2, title }) => {
           <Book
             key={detail[0] ? detail[0].id : detail.id}
             book={detail[0] ? detail[0] : detail}
+            goToSetting={goToSetting}
           ></Book>
         ))}
       </ul>

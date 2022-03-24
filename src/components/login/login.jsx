@@ -15,7 +15,7 @@ const Login = ({ authService, realtimeDatabase, goToSetting }) => {
       .login(emailInput, passwordInput) ///
       .then(userID => {
         setTimeout(() => {
-          goToSetting('', userID)
+          goToSetting('', userID, undefined)
         }, 2000)
       })
   }
