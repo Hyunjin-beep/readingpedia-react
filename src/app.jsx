@@ -9,6 +9,7 @@ import Detail from './components/detail/detail'
 import Form from './components/form/form'
 import Header from './components/header/header'
 import Login from './components/login/login'
+import Redirect from './components/redirect'
 
 function App({ booksAPI, authService, realtimeDatabase }) {
   const navigateState = useLocation().state
@@ -74,12 +75,19 @@ function App({ booksAPI, authService, realtimeDatabase }) {
     return () => controller.abort()
   }, [booksAPI])
 
-  const goToSetting = useCallback((path, userID = '', bookID = '') => {
-    navigate(`/${path}`, { state: { id: userID, bookId: bookID } })
-    userID && setUserID(userID)
-    bookID && setBookID(bookID)
-  })
+  const goToSetting = useCallback(
+    (path, userID = '', bookID = '', link = '') => {
+      navigate(`/${path}`, {
+        state: { id: userID, bookId: bookID, link: link },
+      })
+      userID && setUserID(userID)
+      bookID && setBookID(bookID)
+    }
+  )
 
+  const goToLink = link => {
+    goToSetting()
+  }
   return (
     <div>
       <Header goToSetting={goToSetting} userID={userID}></Header>
@@ -145,7 +153,19 @@ function App({ booksAPI, authService, realtimeDatabase }) {
         <Route
           path="/detail"
           exact
-          element={<Detail bookID={bookID} booksAPI={booksAPI}></Detail>}
+          element={
+            <Detail
+              bookID={bookID}
+              booksAPI={booksAPI}
+              goToSetting={goToSetting}
+            ></Detail>
+          }
+        ></Route>
+
+        <Route
+          path="/privacy-policy"
+          exact
+          element={<Redirect></Redirect>}
         ></Route>
       </Routes>
     </div>
