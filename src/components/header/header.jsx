@@ -27,7 +27,12 @@ const Header = memo(({ goToSetting, userID }) => {
       </div>
 
       <div className={styles.navRight}>
-        <button className={styles.navRightBtn}>
+        <button
+          className={styles.navRightBtn}
+          onClick={() => {
+            userID ? goToSetting('personal') : goToSetting('login')
+          }}
+        >
           <a href="#" className={styles.personal}>
             <i className="fas fa-user"></i>
           </a>

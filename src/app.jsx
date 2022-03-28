@@ -9,6 +9,7 @@ import Detail from './components/detail/detail'
 import Form from './components/form/form'
 import Header from './components/header/header'
 import Login from './components/login/login'
+import Personal from './components/personal/personal'
 import Redirect from './components/redirect'
 
 function App({ booksAPI, authService, realtimeDatabase }) {
@@ -85,9 +86,6 @@ function App({ booksAPI, authService, realtimeDatabase }) {
     }
   )
 
-  const goToLink = link => {
-    goToSetting()
-  }
   return (
     <div>
       <Header goToSetting={goToSetting} userID={userID}></Header>
@@ -128,6 +126,8 @@ function App({ booksAPI, authService, realtimeDatabase }) {
             ></Account>
           }
         ></Route>
+
+        <Route path="/personal" exact element={<Personal></Personal>}></Route>
 
         <Route
           path="/"
