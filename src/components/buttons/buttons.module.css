@@ -1,0 +1,20 @@
+@value --grey-dark-color,--color-normal-blue from '../../common/colors.css';
+@value --font-larger from '../../common/size.css';
+
+.buttons_container {
+  width: 65%;
+  margin: auto;
+  margin-bottom: 3rem;
+  text-align: center;
+
+  border-bottom: 2px dotted --grey-dark-color;
+}
+
+.review_btn {
+  padding: 12px 35px;
+  margin: 0 25px 2rem 0;
+  font-size: calc(--font-larger * 0.5);
+  border-radius: 6px;
+  background-color: --color-normal-blue;
+  cursor: pointer;
+}

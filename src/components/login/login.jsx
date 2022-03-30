@@ -2,8 +2,6 @@ import React, { useEffect, useState, useRef } from 'react'
 import styles from './login.module.css'
 
 const Login = ({ authService, realtimeDatabase, goToSetting }) => {
-  //   const [userState, setUserState] = useState(false)
-  //   const [userID, setUserID] = useState('')
   const email = useRef()
   const password = useRef()
 

@@ -1,19 +1,7 @@
 import React, { useEffect, memo, useState } from 'react'
 import styles from './detail.module.css'
 
-const Detail = ({ bookID, booksAPI, goToSetting }) => {
-  const [detail, setDetail] = useState({})
-  const [saleInfor, setSaleInfor] = useState({})
-  useEffect(() => {
-    booksAPI ///
-      .googleBooksID(bookID) ///
-      .then(result => {
-        console.log(result)
-        setSaleInfor(result.saleInfo)
-        setDetail(result.volumeInfo)
-      })
-  }, [booksAPI])
-
+const Detail = ({ detail }) => {
   return (
     <>
       <section className={styles.container}>
@@ -40,9 +28,11 @@ const Detail = ({ bookID, booksAPI, goToSetting }) => {
         </div>
       </section>
 
-      <section className={styles.buttons_container}>
+      {/* <section className={styles.buttons_container}>
         <button className={styles.review_btn}>Write My Thoughts</button>
-        <button className={styles.review_btn}>Add to My List</button>
+        <button className={styles.review_btn} onClick={onAddClicked}>
+          Add to My List
+        </button>
         <button
           className={styles.review_btn}
           onClick={() => {
@@ -56,7 +46,7 @@ const Detail = ({ bookID, booksAPI, goToSetting }) => {
         >
           Go to buy this book
         </button>
-      </section>
+      </section> */}
     </>
   )
 }

@@ -4,7 +4,6 @@ import styles from './header.module.css'
 
 const Header = memo(({ goToSetting, userID }) => {
   const searchInput = useRef()
-  console.log('header')
 
   return (
     <nav className={styles.navBar}>

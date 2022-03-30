@@ -11,6 +11,7 @@ import Header from './components/header/header'
 import Login from './components/login/login'
 import Personal from './components/personal/personal'
 import Redirect from './components/redirect'
+import Reviewdetail from './components/reviewdetail/reviewdetail'
 
 function App({ booksAPI, authService, realtimeDatabase }) {
   const navigateState = useLocation().state
@@ -18,7 +19,7 @@ function App({ booksAPI, authService, realtimeDatabase }) {
   const [bestsellersISBN, setBestsellers] = useState([])
   const [detail, setDetail] = useState([])
   const [genres, setGenre] = useState([])
-  const [userID, setUserID] = useState(navigateState && navigateState.id)
+  const [userID, setUserID] = useState('')
   const [bookID, setBookID] = useState(navigateState && navigateState.bookId)
 
   const detailArray = []
@@ -76,15 +77,27 @@ function App({ booksAPI, authService, realtimeDatabase }) {
     return () => controller.abort()
   }, [booksAPI])
 
+  useEffect(() => {
+    authService ///
+      .onAuthState(user => {
+        user && setUserID(user.uid)
+      })
+  })
+
   const goToSetting = useCallback(
     (path, userID = '', bookID = '', link = '') => {
       navigate(`/${path}`, {
         state: { id: userID, bookId: bookID, link: link },
       })
-      userID && setUserID(userID)
+      // userID && setUserID(userID)
       bookID && setBookID(bookID)
     }
   )
+
+  const saveData = (root, data) => {
+    realtimeDatabase ///
+      .saveData(root, data)
+  }
 
   return (
     <div>
@@ -154,11 +167,13 @@ function App({ booksAPI, authService, realtimeDatabase }) {
           path="/detail"
           exact
           element={
-            <Detail
+            <Reviewdetail
               bookID={bookID}
               booksAPI={booksAPI}
               goToSetting={goToSetting}
-            ></Detail>
+              saveData={saveData}
+              userID={userID}
+            ></Reviewdetail>
           }
         ></Route>
 

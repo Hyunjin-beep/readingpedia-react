@@ -29,7 +29,14 @@ const Account = ({ goToSetting, userID, authService, realtimeDatabase }) => {
           </a>
         </li>
         <li className={styles.item}>
-          <a href="" className={styles.link}>
+          <a
+            href=""
+            className={styles.link}
+            onClick={() => {
+              authService.signOut()
+              goToSetting('', null)
+            }}
+          >
             LogOut
           </a>
         </li>

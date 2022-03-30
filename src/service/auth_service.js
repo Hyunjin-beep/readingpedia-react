@@ -3,6 +3,7 @@ import {
   createUserWithEmailAndPassword,
   onAuthStateChanged,
   signInWithEmailAndPassword,
+  signOut,
 } from 'firebase/auth'
 
 class AuthService {
@@ -40,6 +41,10 @@ class AuthService {
 
     const userID = userCredential.user.uid
     return userID
+  }
+
+  signOut() {
+    signOut(this.auth)
   }
 }
 
