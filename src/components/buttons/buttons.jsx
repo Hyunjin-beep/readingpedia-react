@@ -2,35 +2,23 @@ import React from 'react'
 import styles from './buttons.module.css'
 
 const Buttons = ({
-  bookID,
-  saveData,
-  userID,
-  saleInfor,
+  addBook,
   goToSetting,
+  onClickReview,
   detail,
+  saleInfor,
 }) => {
-  const onAddClicked = event => {
-    const curr = new Date()
-    const date = `${curr.getFullYear()} ${
-      curr.getMonth() + 1
-    } ${curr.getDate()}`
-
-    const book = {
-      id: bookID,
-      cover_img: detail.imageLinks ? detail.imageLinks.thumbnail : '',
-      date,
-      pageCount: detail.pageCount ? detail.pageCount : 0,
-    }
-    saveData(`lists/${userID}/${bookID}`, book)
-    setTimeout(() => {
-      alert('Successfully Added')
-    }, 1500)
-  }
-
   return (
     <section className={styles.buttons_container}>
-      <button className={styles.review_btn}>Write My Thoughts</button>
-      <button className={styles.review_btn} onClick={onAddClicked}>
+      <button
+        className={styles.review_btn}
+        onClick={() => {
+          onClickReview(true)
+        }}
+      >
+        Write My Thoughts
+      </button>
+      <button className={styles.review_btn} onClick={addBook}>
         Add to My List
       </button>
       <button

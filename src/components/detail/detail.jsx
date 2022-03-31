@@ -27,26 +27,6 @@ const Detail = ({ detail }) => {
           </div>
         </div>
       </section>
-
-      {/* <section className={styles.buttons_container}>
-        <button className={styles.review_btn}>Write My Thoughts</button>
-        <button className={styles.review_btn} onClick={onAddClicked}>
-          Add to My List
-        </button>
-        <button
-          className={styles.review_btn}
-          onClick={() => {
-            goToSetting(
-              'privacy-policy',
-              undefined,
-              undefined,
-              saleInfor.buyLink ? saleInfor.buyLink : detail.previewLink
-            )
-          }}
-        >
-          Go to buy this book
-        </button>
-      </section> */}
     </>
   )
 }

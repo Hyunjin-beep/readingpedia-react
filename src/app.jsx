@@ -51,9 +51,7 @@ function App({ booksAPI, authService, realtimeDatabase }) {
           })
         })
     }, 2000)
-
-    return () => controller.abort()
-  }, [booksAPI])
+  }, [])
 
   useEffect(() => {
     setTimeout(() => {
@@ -73,16 +71,14 @@ function App({ booksAPI, authService, realtimeDatabase }) {
           .catch(error => console.log('error:', error))
       }
     }, 2000)
-
-    return () => controller.abort()
-  }, [booksAPI])
+  }, [])
 
   useEffect(() => {
     authService ///
       .onAuthState(user => {
         user && setUserID(user.uid)
       })
-  })
+  }, [])
 
   const goToSetting = useCallback(
     (path, userID = '', bookID = '', link = '') => {
@@ -169,10 +165,10 @@ function App({ booksAPI, authService, realtimeDatabase }) {
           element={
             <Reviewdetail
               bookID={bookID}
+              userID={userID}
               booksAPI={booksAPI}
               goToSetting={goToSetting}
-              saveData={saveData}
-              userID={userID}
+              realtimeDatabase={realtimeDatabase}
             ></Reviewdetail>
           }
         ></Route>
