@@ -40,7 +40,7 @@ const Reviewdetail = ({
   const saveReview = review => {
     const data = {
       cover_img: detail.imageLinks ? detail.imageLinks.thumbnail : '',
-      bookID: bookID,
+      id: bookID,
       pageCount: detail.pageCount ? detail.pageCount : 0,
       review: review,
     }

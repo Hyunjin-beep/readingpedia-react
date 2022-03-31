@@ -1,12 +1,46 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
+
 import styles from './personal.module.css'
 
-const Personal = props => {
+const Personal = ({ userID, realtimeDatabase, goToSetting }) => {
+  const [user, setUser] = useState({})
+  const [review, setReview] = useState({})
+  const [list, setList] = useState({})
+  const [count, setCount] = useState(0)
+  useEffect(() => {
+    realtimeDatabase ///
+      .getData(`users/${userID}`, user => {
+        setUser(user)
+      })
+
+    realtimeDatabase ///
+      .getData(`review/${userID}`, review => {
+        setReview(review)
+      })
+
+    realtimeDatabase ///
+      .getData(`lists/${userID}`, lists => {
+        setList(lists)
+      })
+  }, [])
+
+  useEffect(() => {
+    let page_count = 0
+    for (let item in review) {
+      console.log(review[item].pageCount)
+      page_count += review[item].pageCount
+    }
+
+    page_count = page_count > 100 ? page_count / 100 : page_count
+    setCount(page_count)
+  }, [])
   return (
     <>
       <section className={styles.top_container}>
-        <span className={styles.name}>HV</span>
-        <span className={styles.height}>Your Knowledge Height is 148cm.</span>
+        <span className={styles.name}>{user.nickName}</span>
+        <span className={styles.height}>
+          Your Knowledge Height is {count}M.
+        </span>
       </section>
 
       <section className={styles.container}>

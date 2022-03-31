@@ -25,8 +25,6 @@ function App({ booksAPI, authService, realtimeDatabase }) {
   const detailArray = []
   let id = 0
 
-  const controller = new AbortController()
-
   useEffect(() => {
     setTimeout(() => {
       booksAPI ///
@@ -136,7 +134,17 @@ function App({ booksAPI, authService, realtimeDatabase }) {
           }
         ></Route>
 
-        <Route path="/personal" exact element={<Personal></Personal>}></Route>
+        <Route
+          path="/personal"
+          exact
+          element={
+            <Personal
+              userID={userID}
+              realtimeDatabase={realtimeDatabase}
+              goToSetting={goToSetting}
+            ></Personal>
+          }
+        ></Route>
 
         <Route
           path="/"
